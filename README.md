@@ -6,8 +6,8 @@ A [Next.js](https://nextjs.org/) application, powered by the Vercel AI SDK, that
 
 ## Features
 
-- Information retrieval and addition through tool calls using the [`streamText`](https://sdk.vercel.ai/docs/reference/ai-sdk-core/stream-text) function
-- Real-time streaming of model responses to the frontend using the [`useChat`](https://sdk.vercel.ai/docs/reference/ai-sdk-ui/use-chat) hook
+- Information retrieval and addition through tool calls using the [`streamText`](https://ai-sdk.dev/docs/reference/ai-sdk-core/stream-text) function
+- Real-time streaming of model responses to the frontend using the [`useChat`](https://ai-sdk.dev/docs/reference/ai-sdk-ui/use-chat) hook
 - Vector embedding storage with [DrizzleORM](https://orm.drizzle.team/) and [PostgreSQL](https://www.postgresql.org/)
 - Animated UI with [Framer Motion](https://www.framer.com/motion/)
 
@@ -27,10 +27,10 @@ To get the project up and running, follow these steps:
    cp .env.example .env
    ```
 
-3. Add your OpenAI API key and PostgreSQL connection string to the `.env` file:
+3. Add your Vercel AI Gateway API key and PostgreSQL connection string to the `.env` file:
 
    ```
-   OPENAI_API_KEY=your_api_key_here
+   AI_GATEWAY_API_KEY=your_api_key_here
    DATABASE_URL=your_postgres_connection_string_here
    ```
 
