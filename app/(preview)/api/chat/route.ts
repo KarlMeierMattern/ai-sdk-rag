@@ -54,12 +54,12 @@ export async function POST(req: Request) {
         execute: async ({ similarQuestions }) => {
           const results = await Promise.all(
             similarQuestions.map(
-              async (question) => await findRelevantContent(question),
-            ),
+              async (question) => await findRelevantContent(question)
+            )
           );
           // Flatten the array of arrays and remove duplicates based on 'name'
           const uniqueResults = Array.from(
-            new Map(results.flat().map((item) => [item?.name, item])).values(),
+            new Map(results.flat().map((item) => [item?.name, item])).values()
           );
           return uniqueResults;
         },
@@ -71,7 +71,7 @@ export async function POST(req: Request) {
           toolsToCallInOrder: z
             .array(z.string())
             .describe(
-              "these are the tools you need to call in the order necessary to respond to the users query",
+              "these are the tools you need to call in the order necessary to respond to the users query"
             ),
         }),
         execute: async ({ query }) => {
