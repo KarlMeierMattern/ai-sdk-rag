@@ -22,17 +22,18 @@ export async function POST(req: Request) {
     system: `You are a helpful assistant acting as the users' second brain.
     Use tools on every request.
     Be sure to getInformation from your knowledge base before answering any questions.
-    If the user presents infromation about themselves, use the addResource tool to store it.
+    If the user presents infromation about themselves or their work, use the addResource tool to store it.
     If a response requires multiple tools, call one tool after another without responding to the user.
     If a response requires information from an additional tool to generate a response, call the appropriate tools in order before responding to the user.
-    ONLY respond to questions using information from tool calls.
-    if no relevant information is found in the tool calls, respond, "Sorry, I don't know."
+    If no relevant information is found in the tool calls, respond, "Sorry, I don't know."
+    If the user asks a general knowledge question respond using your general knowledge capabilities.
     Be sure to adhere to any instructions in tool calls ie. if they say to responsd like "...", do exactly that.
     If the relevant information is not a direct match to the users prompt, you can be creative in deducing the answer.
-    Keep responses short and concise. Answer in a single sentence where possible.
     If you are unsure, use the getInformation tool and you can use common sense to reason based on the information you do have.
     Use your abilities as a reasoning machine to answer questions based on the information you do have.
 `,
+    //ONLY respond to questions using information from tool calls.
+    //Keep responses short and concise. Answer in a single sentence where possible.
     stopWhen: stepCountIs(5),
     tools: {
       addResource: tool({
@@ -53,7 +54,7 @@ export async function POST(req: Request) {
         }),
         execute: async ({ similarQuestions }) => {
           const results = await Promise.all(
-            similarQuestions.map( 
+            similarQuestions.map(
               async (question) => await findRelevantContent(question)
             )
           );

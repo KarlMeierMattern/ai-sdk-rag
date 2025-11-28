@@ -37,9 +37,30 @@ export const createResourceFromDocument = async (
         .limit(1);
 
       if (existing.length > 0) {
+        const resourceId = existing[0].id;
+
+        // Check if embeddings exist - if not, create them
+        const existingEmbeddings = await db
+          .select()
+          .from(embeddingsTable)
+          .where(eq(embeddingsTable.resourceId, resourceId))
+          .limit(1);
+
+        if (existingEmbeddings.length === 0) {
+          // Resource exists but no embeddings - backfill them
+          const embeddings = await generateEmbeddings(document.content);
+          await db.insert(embeddingsTable).values(
+            embeddings.map((embedding) => ({
+              resourceId,
+              ...embedding,
+            }))
+          );
+          return { success: true, resourceId, backfilled: true };
+        }
+
         return {
           success: true,
-          resourceId: existing[0].id,
+          resourceId,
           skipped: true,
         };
       }
@@ -126,7 +147,7 @@ export const createResourcesFromDocuments = async (
  * Legacy function - maintains backward compatibility
  * For new code, use createResourceFromDocument or createResourcesFromDocuments
  */
-export const createResource = async (input: NewResourceParams) => {
+export const createResource = async (input: { content: string }) => {
   try {
     const { content } = insertResourceSchema.parse(input);
 

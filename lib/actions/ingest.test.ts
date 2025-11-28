@@ -18,9 +18,7 @@ async function testIngestion() {
   // Test 1: Ingest a single priority client (Remgro)
   console.log("1. Testing single document ingestion (Remgro):");
   try {
-    const remgroClient = priorityClients.find(
-      (c) => c.priority_account === "Remgro"
-    );
+    const remgroClient = priorityClients.find((c) => c.account === "Remgro");
 
     if (!remgroClient) {
       throw new Error("Remgro client not found in test data");

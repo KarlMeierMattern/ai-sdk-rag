@@ -10,7 +10,7 @@ const ProjectOverview = () => {
       transition={{ duration: 5 }}
     >
       <div className="border rounded-lg p-6 flex flex-col gap-4 text-neutral-500 text-sm dark:text-neutral-400 dark:border-neutral-700 dark:bg-neutral-900">
-        Allo!
+        PwC Knowledge Base
       </div>
     </motion.div>
   );

@@ -10,6 +10,7 @@
     "db:generate": "drizzle-kit generate",
     "db:migrate": "tsx lib/db/migrate.ts",
     "db:seed": "tsx lib/db/seed.ts",
+    "db:backfill": "tsx lib/db/backfill-embeddings.ts",
     "db:drop": "drizzle-kit drop",
     "db:pull": "drizzle-kit introspect",
     "db:push": "drizzle-kit push",
