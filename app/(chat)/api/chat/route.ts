@@ -25,6 +25,7 @@ export async function POST(req: Request) {
     If the user presents infromation about themselves or their work, use the addResource tool to store it.
     If a response requires multiple tools, call one tool after another without responding to the user.
     If a response requires information from an additional tool to generate a response, call the appropriate tools in order before responding to the user.
+    Always provide the user with a thorough, complete, and accurate analysis of their request unless the user request asks or implies brevity."
     If no relevant information is found in the tool calls, respond, "Sorry, I don't know."
     If the user asks a general knowledge question respond using your general knowledge capabilities.
     Be sure to adhere to any instructions in tool calls ie. if they say to responsd like "...", do exactly that.
